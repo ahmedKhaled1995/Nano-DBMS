@@ -57,83 +57,12 @@ else
             echo "Invalid"
             continue
         else
-            # Here, we want to check the type of the field the user wants to update (int or string) to see
-            # if we will get get_number script or get_word script
-            value_entered=0
-            let awk_user_choice=$user_choice+1
-            let user_choice=$user_choice
-            
-            if [ ${col_types_arr[$user_choice]} == "int" ]
-            then
-                # Getting the value of the int column to update
-                while [ $value_entered == 0 ]
-                do
-                    echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
-                    . utils/get_number.sh
-                    if [ $? == 1 ]
-                    then
-                        echo "Invalid"
-                        continue
-                    fi
-        
-                    # Getting the clean input
-                    value=$entered_number # entered_number is defined in the above script
-                    value_entered=1
-                done
-                
-                # Getting the value of the new int column
-                value_entered=0
-                while [ $value_entered == 0 ]
-                do
-                    echo "New ${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
-                    . utils/get_number.sh
-                    if [ $? == 1 ]
-                    then
-                        echo "Invalid"
-                        continue
-                    fi
-        
-                    # Getting the clean input
-                    new_value=$entered_number # entered_number is defined in the above script
-                    value_entered=1
-                done
-                
-            else
-                # Getting the value if the string col to update
-                while [ $value_entered == 0 ]
-                do
-                    echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
-                    . utils/get_word.sh 
-                    if [ $? == 1 ]
-                    then
-                        echo "Invalid"
-                        continue
-                    fi
- 
-                    # Getting the clean word
-                    value=$entered_word  # entered_word is defined in the above script
-                    value_entered=1
-                done
-                
-                # Getting the value if the new string column
-                value_entered=0
-                while [ $value_entered == 0 ]
-                do
-                    echo "New ${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
-                    . utils/get_word.sh 
-                    if [ $? == 1 ]
-                    then
-                        echo "Invalid"
-                        continue
-                    fi
- 
-                    # Getting the clean word
-                    new_value=$entered_word  # entered_word is defined in the above script
-                    value_entered=1
-                done
-            fi
+            # Getting the column to update and the new values
+            . record_scripts/update_record_helper.sh
         fi
     
+    # Updating the file (database)
+    let awk_user_choice=$user_choice+1 # Because id is the first field
     awk -i inplace -F: "
         BEGIN { OFS=FS }
         {
@@ -153,5 +82,5 @@ else
     done
     
 fi
-echo "Press any key to continue: "
+echo "Press Enter to continue: "
 read
