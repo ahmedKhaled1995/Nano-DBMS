@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. utils/header_script.sh
+
 # Getting table name
 table_created=0
 

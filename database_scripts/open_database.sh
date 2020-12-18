@@ -1,7 +1,6 @@
 #! /bin/bash
 
-echo "~  Go Back"
-echo ""
+. utils/header_script.sh
 
 # Calling list database script to list avaialble databases
 . database_scripts/list_database.sh 1

@@ -1,7 +1,8 @@
 #! /bin/bash
 
-# This script is heart of the program (Like main method in C)
-#------------------------------------------------------------
+#-------------------------------------------------------------#
+# This script is heart of the program (Like main method in C) #
+#-------------------------------------------------------------#
 
 # Calling the init script to iniatlize the program main directory in user's home directry if the program's main directory doesn't exist
 . init.sh

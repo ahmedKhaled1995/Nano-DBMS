@@ -9,6 +9,8 @@
 # the reason for that is because this script is called by source from the main.sh script, which is located in the main
 # project directory (inside the project directory is the database_scripts directory).
 
+. utils/header_script.sh
+
 . database_scripts/list_database.sh 1
 
 databases=$available_databases  # available_databases is defined in the script above

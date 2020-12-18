@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. utils/header_script.sh
+
 . table_scripts/list_table.sh 1
 
 tables=$available_tables  # available_tables is defined in the script above

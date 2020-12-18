@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. utils/header_script.sh
+
 number_of_columns=$(sed -n '1p' $table_path | cut -f1 -d:)
 
 row_id=$(sed '$!d' $table_path | cut -f1 -d:)

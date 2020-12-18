@@ -34,13 +34,13 @@ function create_table
         fi
     done
     
-    # Geiing columns types (string or int) and names
+    # Getting columns types (string or int) and names
     typeset -i counter
     counter=1 # Not 0, 0 is reserved for the id column
     let columns_num=$columns_num+1
-    
     while [ $counter -lt $columns_num ]
     do
+        # First, we get the types
         echo "Type of column $counter: "
         select choice in "string" "int"
         do
@@ -59,6 +59,8 @@ function create_table
                 ;;
         esac
         done
+        
+        # Second, we get column names
         column_name_entered=0
         while [ $column_name_entered == 0 ]
         do
@@ -73,7 +75,23 @@ function create_table
             # Getting the clean word
             column_name=$entered_word  # entered_word is defined in the above script
             
+            # Storing the names entered in an array to make sure column names of table are uniqu
+            typeset -i index
+            let index=$counter-1
+            if [ ${#column_names_arr[@]} -gt 0 ]
+            then
+                . utils/check_column_name.sh
+                if [ $name_found == 1 ]   # name_found is defined in the script above
+                then
+                    # User enterd that name for a column before
+                    echo "Invalid"
+                    continue
+                fi
+            fi
+            
             names=$names:$column_name
+            column_names_arr[$index]=$column_name
+            
             column_name_entered=1
         done
         counter=$counter+1

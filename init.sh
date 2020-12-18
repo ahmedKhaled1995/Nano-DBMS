@@ -1,7 +1,6 @@
 #! /bin/bash
 
-# Getting user name and creating the main path of the program
-#export user=$(whoami)
+# Creating the main path of the program
 export root_dir="$HOME/My_Nano_mysql"
 
 # Will check the return code of the command, if 0 then file Folder exists and 

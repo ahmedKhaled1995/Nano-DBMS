@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. utils/header_script.sh
+
 number_of_columns=$(sed -n '1p' $table_path | cut -f1 -d:)
 
 row_id=$(sed '$!d' $table_path | cut -f1 -d:)
@@ -15,7 +17,7 @@ else
     typeset -i field
     counter=0
     
-    # Getting types and names of columns
+    # Getting types and names of columns from the file (table)
     while [ $counter -lt $number_of_columns ]
     do
         field=$counter+1

@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. utils/header_script.sh
+
 database_created=0
 
 while [ $database_created == 0 ]

@@ -1,12 +1,10 @@
 #! /bin/bash
 
 export chosen_database=$1
-#path_to_chosen_database=$root_dir/databases/$chosen_database
 
 while true
 do
     clear
-
     echo ">>>$chosen_database"
     echo ""
 

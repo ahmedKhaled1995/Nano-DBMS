@@ -1,7 +1,6 @@
 #! /bin/bash
 
-echo "~  Go Back"
-echo ""
+. utils/header_script.sh
 
 # Calling list tables script to list avaialble tables
 . table_scripts/list_table.sh 1
