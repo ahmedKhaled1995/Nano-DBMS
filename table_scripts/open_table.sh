@@ -44,8 +44,7 @@ else
             
             # User has returned to select another database, so we clear the screen then print it again
             clear
-            echo "~  Go Back"
-            echo ""
+            . utils/header_script.sh
             . table_scripts/list_table.sh 1
         else
             echo "Invalid"

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-. utils/header_script.sh "Hit enter to escape input a field, NULL will be added."
+. utils/header_script.sh "If empyt field is entered, NULL will be added as a value."
 
 number_of_columns=$(sed -n '1p' $table_path | cut -f1 -d:)
 
@@ -29,10 +29,12 @@ else
     done
     
     # Displaying options for the user
-    counter=1
+    typeset -i tmp
+    counter=0
     while [ $counter -lt $number_of_columns ]
     do
-        echo "$counter) Update ${col_names_arr[$counter]}. "
+        tmp=$counter+1;
+        echo "$tmp) Update ${col_names_arr[$counter]}. "
         counter=$counter+1
     done
     
@@ -50,25 +52,53 @@ else
         fi
         
         # Getting the clean input
-        user_choice=$entered_number # entered_number is defined in the above script
+        let user_choice=$entered_number-1 # entered_number is defined in the above script
         let user_choices_limit=$number_of_columns-1
         
         # Checking if user entered a valid number
-        if [ $user_choice -lt 1 ] || [ $user_choice -gt $user_choices_limit ]   # error is defined in the script above
+        if [ $user_choice -lt 0 ] || [ $user_choice -gt $user_choices_limit ]   # error is defined in the script above
         then
             echo "Invalid"
             continue
         else
-            # Getting the column to update and the new values
+            # We check if the user wants to update id field, in such case
+            # we call script made specially for updating by id
+            if [ $user_choice == 0 ]
+            then
+                # Getting the value (id) of the int column to update
+                value_entered=0
+                while [ $value_entered == 0 ]
+                do
+                    echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
+                    . utils/get_number.sh
+                    if [ $? == 1 ]
+                    then
+                        echo "Invalid"
+                        continue
+                    fi
+            
+                    # Getting the clean input
+                    row_id=$entered_number # entered_number is defined in the above script
+                    value_entered=1
+                done
+                
+                . record_scripts/update_by_id.sh
+                exit 0 
+            fi
+            
+            # Here we are udating any column other than id so we
+            # get the column to update and the new values
+            # for that, we call a helper script
             . record_scripts/update_record_helper.sh
         fi
     
     # Updating the file (database)
+    # info_before_update=$(stat -c %y $table_path | cut -f2 -d' ' )
     let awk_user_choice=$user_choice+1 # Because id is the first field
     awk -i inplace -F: "
         BEGIN { OFS=FS }
         {
-            if(NR == 1) {
+            if(NR == 1 || NR == 2 || NR == 3) {
                 print \$0}   
             else if(\$$awk_user_choice == \"$value\") {
                \$$awk_user_choice=\"$new_value\";
@@ -77,9 +107,7 @@ else
             else {
                 print \$0} 
         }" $table_path 
-        
-    echo "Operation complete"
-    
+    echo "Update operation completed!"
     user_made_a_choice=1
     done
     

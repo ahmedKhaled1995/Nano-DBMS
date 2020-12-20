@@ -5,13 +5,15 @@
 
 echo "#############################################################################"
 echo "1) Type ~ (Tilda) then hit enter to go back to the previous menu."
-echo "2) Reserved words: int, string, id and NULL."
+echo "2) Reserved words:  int  -  string  -  id   -   NULL"
+echo "3) Allowed chars are alphanumeric and under score ' a->z  A->Z  0->9  _ ' ."
+echo "4) If an illegal char was input, it will be ignored and the input word will be taken without it."
 
 # We check if we want to print any additional thing inside that block when calling the script
 if [ $# -gt 0 ]
 then
     typeset -i num
-    num=3
+    num=5
     for arg in "$@"
     do
         echo "$num) $arg"

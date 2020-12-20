@@ -1,6 +1,6 @@
 #! /bin/bash
 
-. utils/header_script.sh "Hit enter to escape input a field, NULL will be added."
+. utils/header_script.sh "If empyt field is entered, NULL will be added as a value."
 
 number_of_columns=$(sed -n '1p' $table_path | cut -f1 -d:)
 
@@ -46,9 +46,10 @@ do
     then
         echo "$col_name[type:$col_type]: "
         . utils/get_number.sh
+        code=$?
         
         # Checking if user entered empty column to substitue it's value by null
-        if [ -z $entered_number ] # entered_number is defined in the above script
+        if [ $is_null == 1 ] # is_null is defined in the above script
         then
             value="NULL"
             line_to_insert=$line_to_insert:$value
@@ -56,7 +57,7 @@ do
             continue
         fi
         
-        if [ $? == 1 ]
+        if [ $code == 1 ]
         then
             echo "Invalid"
             continue
@@ -68,6 +69,7 @@ do
     else
         echo "$col_name[type:$col_type]: "
        . utils/get_word.sh 
+       code=$?
        
         # Checking if user entered empty column to substitue it's value by null
         if [ -z $entered_word ] # entered_word is defined in the above script
@@ -78,7 +80,7 @@ do
             continue
         fi
        
-        if [ $? == 1 ]
+        if [ $code == 1 ]
         then
             echo "Invalid"
             continue

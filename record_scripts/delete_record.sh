@@ -74,13 +74,23 @@ else
                 do
                     echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
                     . utils/get_number.sh
-                    if [ $? == 1 ]
+                    code=$?
+                    
+                    # Checking if user entered empty column to substitue it's value by null
+                    if [ $is_null == 1 ] # is_null is defined in the above script
+                    then
+                        value="NULL"
+                        value_entered=1
+                        continue
+                    fi
+    
+                    if [ $code == 1 ]
                     then
                         echo "Invalid"
                         continue
                     fi
         
-                    # Getting th clean input
+                    # Getting the clean input
                     value=$entered_number # entered_number is defined in the above script
                     value_entered=1
                 done
@@ -90,7 +100,17 @@ else
                 do
                     echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
                     . utils/get_word.sh 
-                    if [ $? == 1 ]
+                    
+                    # Checking if use entered NULL
+                    if [ -z $entered_word ]
+                    code=$?
+                    then
+                        value="NULL"
+                        value_entered=1
+                        continue
+                    fi
+                    
+                    if [ $code == 1 ]
                     then
                         echo "Invalid"
                         continue

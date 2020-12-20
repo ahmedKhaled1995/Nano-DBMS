@@ -8,6 +8,13 @@ code=0
 function get_clean_number
 {
     read entered_num
+    
+    #echo ${#entered_num} 
+    
+    if [ ${#entered_num} == 0 ]
+    then
+        code=5  # To indicate user wants to input a null
+    fi
   
     number_found=0
     for (( i=0; i<${#entered_num}; i++ ));
@@ -41,10 +48,7 @@ function get_clean_number
     then
         # Getting rid of any trailling zeros
         cleaned_number=$(expr $cleaned_number + 0)
-        #echo $cleaned_number
     fi
-    
-    #echo "error: $error"
     
     return $code
 }
