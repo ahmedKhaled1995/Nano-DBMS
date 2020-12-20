@@ -32,6 +32,10 @@ do
             "Back." )
                 exit 0
             ;;
+            "List all records." )
+                clear
+                record_scripts/list_records.sh
+            break;;
             * )
                 echo "$REPLY is not one of the choices."
             ;;

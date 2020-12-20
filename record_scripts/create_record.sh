@@ -1,6 +1,6 @@
 #! /bin/bash
 
-. utils/header_script.sh
+. utils/header_script.sh "Hit enter to escape input a field, NULL will be added."
 
 number_of_columns=$(sed -n '1p' $table_path | cut -f1 -d:)
 
@@ -19,11 +19,23 @@ fi
 typeset -i counter
 typeset -i field
 counter=1
-field=1
 
+# Displaying column names
+field=2
+line=" | "
+while [ $field -le $number_of_columns ]
+do
+    col_type=$(sed -n '2p' $table_path | cut -f$field -d:)
+    col_name=$(sed -n '3p' $table_path | cut -f$field -d:)
+    line="$line$col_name[$col_type]  |  "
+    field=$field+1
+done
+echo "Table Columns: $line"
+echo ""
+
+# Getting columns to add to database
 line_to_insert=$row_id
-
-# Getting the data the user wants tp insert
+field=1
 while [ $counter -lt $number_of_columns ]
 do
     field=$counter+1
@@ -34,6 +46,16 @@ do
     then
         echo "$col_name[type:$col_type]: "
         . utils/get_number.sh
+        
+        # Checking if user entered empty column to substitue it's value by null
+        if [ -z $entered_number ] # entered_number is defined in the above script
+        then
+            value="NULL"
+            line_to_insert=$line_to_insert:$value
+            counter=$counter+1
+            continue
+        fi
+        
         if [ $? == 1 ]
         then
             echo "Invalid"
@@ -46,6 +68,16 @@ do
     else
         echo "$col_name[type:$col_type]: "
        . utils/get_word.sh 
+       
+        # Checking if user entered empty column to substitue it's value by null
+        if [ -z $entered_word ] # entered_word is defined in the above script
+        then
+            value="NULL"
+            line_to_insert=$line_to_insert:$value
+            counter=$counter+1
+            continue
+        fi
+       
         if [ $? == 1 ]
         then
             echo "Invalid"

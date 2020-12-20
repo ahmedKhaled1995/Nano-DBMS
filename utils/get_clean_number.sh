@@ -7,18 +7,18 @@ code=0
 # If 0 is returend, then user doesn't want to go back. 1 then means user wants to go back to previous menu
 function get_clean_number
 {
-    read num
+    read entered_num
   
     number_found=0
-    for (( i=0; i<${#num}; i++ ));
+    for (( i=0; i<${#entered_num}; i++ ));
     do  
-        case ${num:$i:1} in
+        case ${entered_num:$i:1} in
             [0-9] )   
-            cleaned_number=$cleaned_number${num:$i:1}
+            cleaned_number=$cleaned_number${entered_num:$i:1}
             number_found=1
             ;;
             [-] )   
-            cleaned_number=$cleaned_number${num:$i:1}
+            cleaned_number=$cleaned_number${entered_num:$i:1}
             if [ $i != 0 ]
             then
                error=1

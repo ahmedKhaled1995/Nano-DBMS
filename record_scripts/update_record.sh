@@ -1,6 +1,6 @@
 #! /bin/bash
 
-. utils/header_script.sh
+. utils/header_script.sh "Hit enter to escape input a field, NULL will be added."
 
 number_of_columns=$(sed -n '1p' $table_path | cut -f1 -d:)
 

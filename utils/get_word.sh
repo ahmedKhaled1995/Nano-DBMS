@@ -17,7 +17,7 @@ function get_word
     entered_word=$cleaned_word   # cleaned_word is defined in the above script
     
     # Checking if user entered a valid word
-    if [ -z $entered_word ] || [ $entered_word == "int" ] || [ $entered_word == "string" ]  || [ $entered_word == "id" ]
+    if [ -z $entered_word ] || [ $entered_word == "int" ] || [ $entered_word == "string" ]  || [ $entered_word == "id" ]  || [ $entered_word == "NULL" ]
     then
         return 1
     else

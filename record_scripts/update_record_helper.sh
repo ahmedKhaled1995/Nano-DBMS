@@ -10,7 +10,7 @@ then
 # Getting the value of the int column to update
 while [ $value_entered == 0 ]
 do
-    echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
+    echo "Current ${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
     . utils/get_number.sh
     if [ $? == 1 ]
     then
@@ -29,6 +29,15 @@ while [ $value_entered == 0 ]
 do
     echo "New ${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
     . utils/get_number.sh
+    
+    # Checking if user entered empty column to substitue it's value by null
+    if [ -z $entered_number ] # entered_number is defined in the above script
+    then
+        new_value=NULL
+        value_entered=1
+        continue
+    fi
+    
     if [ $? == 1 ]
     then
         echo "Invalid"
@@ -44,7 +53,7 @@ else
 # Getting the value if the string col to update
 while [ $value_entered == 0 ]
 do
-    echo "${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
+    echo "Current ${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
     . utils/get_word.sh 
     if [ $? == 1 ]
     then
@@ -62,7 +71,16 @@ value_entered=0
 while [ $value_entered == 0 ]
 do
     echo "New ${col_names_arr[$user_choice]}[${col_types_arr[$user_choice]}] = "
-    . utils/get_word.sh 
+    . utils/get_word.sh
+    
+    # Checking if user entered empty column to substitue it's value by null
+    if [ -z $entered_word ] # entered_word is defined in the above script
+    then
+        new_value=NULL
+        value_entered=1
+        continue
+    fi
+     
     if [ $? == 1 ]
     then
         echo "Invalid"
