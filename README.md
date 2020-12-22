@@ -5,7 +5,7 @@ This is a small (Nano) DBMS with minimal functionality of DBMS like mysql.
 
 ## Running the app
 
-#### No third party pachages are required
+#### No third party packages are required
 to start the app, simply run the following inside app directory:
 
 ```bash
