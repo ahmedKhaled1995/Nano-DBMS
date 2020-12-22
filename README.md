@@ -24,7 +24,10 @@ Databases are stored as directories, while tables are stored as files.
 The app creates a directory in the user's home path, the directory is called 'My_Nano_mysql'.
 
 
-Inside that directory is a directory called databaseses, inside it, each database created by user has its own directory, inside that database directory are the files that represent the tables.
+Inside that directory is a directory called databaseses, inside it, each database created by user is stored as a directory.
+
+
+Inside that database directory are the files that represent the tables.
 
 
 > _Example for a table called bar inside database foo_: /$HOME/My_Nano_mysql/databaseses/foo/bar
