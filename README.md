@@ -43,8 +43,8 @@ Databases are stored as directories, while tables are stored as files.
 ### 3] Scripts in database_scripts directory:
 ----------------------------------------------
 > _Note_: scripts that handle the database itself, like creation, deletion, ....
-#### 1] create_database.sh: used to create database.
-#### 2] database_view.sh: the main menu the user sees to create, remove, list and open a database.
+1] create_database.sh: used to create database.
+2] database_view.sh: the main menu the user sees to create, remove, list and open a database.
 #### 3] delete_database.sh: used to remove a database.
 #### 4] inside_database.sh: displays operations that can be done inside a database (create, remove tables).
 #### 5] list_database.sh: used to list all available databases.
@@ -79,4 +79,4 @@ The great team of ITI, Wessal and Ahmad Khaled
 
 ## Acknowledgment
 
-The awesome team of ITI and bash script instructors :D .
+The awesome team of ITI and bash script instructors :D 
