@@ -1,12 +1,12 @@
 # Nano-DBMS
-This is a small (Nano) DBMS with minimal functionality of DBMS like mysql.
+This is a small (Nano) DBMS with minimal functionality of DBMS like mysql. Written in bash script.
 
 ## Getting started
 
 ## Running the app
 
 #### No third party packages are required
-to start the app, simply run the following command inside app directory:
+This app runs on any linux os. To start the app, simply run the following command inside app directory:
 
 ```bash
 ./main.sh
@@ -52,7 +52,6 @@ contains some lines to be printed in some app menues.
 
 ### 3] Scripts in database_scripts directory:
 ----------------------------------------------
-> _Note_: scripts that handle the database itself, like creation, deletion, ....
 #### (1) create_database.sh:
 used to create database.
 #### (2) database_view.sh:
@@ -68,7 +67,6 @@ used to open a certain database (which fires the inside_database.sh script).
 
 ### 4] Scripts in table_scripts directory:
 ----------------------------------------------
-> _Note_: scripts that handle the table itself, like creation, deletion, ....
 #### (1) create_table.sh:
 used to create a table.
 #### (2) create_table_helper.sh:
@@ -84,7 +82,6 @@ used to open a certain table (which fires the inside_table.sh script).
 
 ### 5] Scripts in record_scripts directory:
 ----------------------------------------------
-> _Note_: scripts that handle the record itself, like creation, deletion, ....
 #### (1) create_record.sh:
 used to create a row.
 #### (2) delete_record.sh:
