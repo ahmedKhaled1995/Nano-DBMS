@@ -36,7 +36,7 @@ run it to start the app.
 
 ### 2] Scripts in utils directory:
 --------------------------------------
-> _Note_: utils hold helper scripts that do certain functions, like getting a word, a number, ....
+> _Note_: utils holds helper scripts that do certain functions, like getting a word, a number, ....
 #### (1) get_column_name.sh:
 used to ensure uniqueness of tables' column names (no duplicate column name).
 #### (2) get_clean_number.sh:
