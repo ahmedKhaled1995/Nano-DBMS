@@ -1,6 +1,6 @@
 #! /bin/bash
 
-. utils/header_script.sh
+. utils/header_script.sh "VIP: Primary Key is genetrated automatically in a cloumn called 'id'. So don't enter a column for Primary Key."
 
 # Getting table name
 table_created=0
