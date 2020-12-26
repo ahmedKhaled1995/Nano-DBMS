@@ -109,7 +109,7 @@ used in update_record.sh to handle updating by id, since updating by id is a lit
 
 ## Authors
 
-The great team of ITI, Wessal and Ahmad Khaled
+The great team of ITI, Wessal Alaa El_Desoky and Ahmad Khaled Hassanien
 
 ## Acknowledgment
 
